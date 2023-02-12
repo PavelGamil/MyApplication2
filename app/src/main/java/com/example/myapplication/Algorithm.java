@@ -2,38 +2,40 @@ package com.example.myapplication;
 
 public class Algorithm {
 
+    private static int a;
+
     // создание пустого конструктора
     public Algorithm() {
     }
 
-    // метод определения счастливый билет или нет
-    public boolean isHappyTicket(String input) {
-        int inputInt = Integer.parseInt(input); // конвертирование данных из String в int
-
-        int s1 = 0, s2 = 0; // создание буферных переменных
-
-        for(int i = 0; i < 3; i++) { // цикл заполнения первой половины числа
-            s1 = s1 + inputInt % 10;
-            inputInt = inputInt / 10;
+    // метод определения счастливого билета по Питерской системе
+    public static boolean isHappyStPetersburg(int x) {
+        int s1 =0, s2 = 0;
+        for(int i = 0; i < 3; i++) {
+            s1 += x % 10;
+            x = x / 10;
+            s2 += x % 10;
+            x = x / 10;
         }
-        for(int i = 0; i < 3; i++) { // цикл заполнения второй половины числа
-            s2 = s2 + inputInt % 10;
-            inputInt = inputInt / 10;
-        }
-        // проверка равенства
-        if (s1 == s2) { // если суммы равны
-            return true;   // то билет счастливый
-        } else { // иначе
-            return false; // билет не счастливый
-        }
+        if (s1 == s2)
+            return true;
+        else
+            return false;
+    }
+    public static void main(String[] args) {
+        System.out.println("Введите номер билета.");
+        if (isHappyStPetersburg(a))
+            System.out.println("Питерский счастливый билет.");
+        if (!isHappyStPetersburg(a))
+            System.out.println("Обычный билет.");
     }
 
     // метод определения следующего счастливого билета (чуть менее быстрый)
     public int nextHappyTicketV1(String input) {
         int inputInt = Integer.parseInt(input); // конвертирование данных из String в int
 
-        if(!isHappyTicket(Integer.toString(inputInt))) { // если билет не счастливый
-            while (!isHappyTicket(Integer.toString(inputInt))) { // то выполняется цикл
+        if(!isHappyStPetersburg(Integer.parseInt(Integer.toString(inputInt)))) { // если билет не счастливый
+            while (!isHappyStPetersburg(Integer.parseInt(Integer.toString(inputInt)))) { // то выполняется цикл
                 inputInt = inputInt + 1; // шаговой проверки следующих билетов до наступления счастливого билета
             }
             return inputInt; // возвращается найденный счастливый билет

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             ticketNumber = ticketNumberIn.getText().toString();
 
             // использование алгоритма для определения счастливого билета
-            if(algorithm.isHappyTicket(ticketNumber)) { // если номер билета счастливый, то об этом выводится информация на экран
+            if(algorithm.isHappyStPetersburg(Integer.parseInt(ticketNumber))) { // если номер билета счастливый, то об этом выводится информация на экран
                 ticketInfoOut.setText("Данный номер билета счастливый " + algorithm.nextHappyTicketV1(ticketNumber));
             } else { // иначе, производится поиск данного билета с последующим выводом на экран
                 ticketInfoOut.setText("Данный номер билета не счастливый, следующим счатливым номером является "
